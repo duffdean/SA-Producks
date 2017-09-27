@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace SA_ProductsReprised
 {
@@ -29,6 +31,15 @@ namespace SA_ProductsReprised
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddDbContext<BrandContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("BrandContext")));
+
+            services.AddDbContext<CategoryContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CategoryContext")));
+
+            services.AddDbContext<ProductContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
