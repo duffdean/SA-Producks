@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Interfaces\BrandRepository.cs" />
+    <Compile Include="Interfaces\CategoryRepository.cs" />
+    <Compile Include="Interfaces\IBrandRepository.cs" />
+    <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

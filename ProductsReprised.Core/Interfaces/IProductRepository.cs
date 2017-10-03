@@ -14,7 +14,10 @@ namespace ProductsReprised.Core.Interfaces
         void Edit(Product p);
         void Delete(Product p);
         void Save(Product p);
-        IEnumerable<Product> GetProducts();
-        Product GetProductById(int Id);                 
+
+        //void Add<TEntity>(TEntity entity);
+        //void Edit<TEntity>(TEntity entity);
+        //void Delete<TEntity>(TEntity entity);
+        //void Save<TEntity>(TEntity entity);
     }
 }

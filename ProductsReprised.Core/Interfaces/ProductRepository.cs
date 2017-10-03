@@ -47,5 +47,26 @@ namespace ProductsReprised.Core.Interfaces
             //Not this... Will need to soft delete, so update active flag to false.
             context.SA_Product.Remove(product);
         }
+        
+        //Below is for IDisposable
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }
