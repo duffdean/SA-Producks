@@ -76,7 +76,7 @@ namespace RepriseMyProducks.Controllers
                 productVM = db.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
-                .Where(p => p.Active == true && 
+                .Where(p => p.Active == true &&
                         p.StockLevel > 0)
                 .Select(p => new ViewModels.Product
                 {
@@ -120,20 +120,33 @@ namespace RepriseMyProducks.Controllers
                    Description = p.Description
                }).ToList();
             }
-            
+
             sClient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
             HttpResponseMessage response = sClient.GetAsync("api/Product").Result;
             if (response.IsSuccessStatusCode)
             {
                 apiProd = response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
-                
+
             }
 
             foreach (Product product in apiProd)
             {
-                if(categoryName != null)
+                if (categoryName != null)
                 {
-                   if (productVM.Any(p => p.Name == product.Name) && product.CategoryId == catId)
+                    if (!productVM.Any(p => p.Name == product.Name) && product.CategoryId == catId)
+                    {
+                        productVM.Add(new ViewModels.Product
+                        {
+                            Name = product.Name,
+                            Description = product.Description,
+                            Price = product.Price
+                        }
+                        );
+                    }
+                }
+                else
+                {
+                    if (!productVM.Any(p => p.Name == product.Name))
                     {
                         productVM.Add(new ViewModels.Product
                         {
