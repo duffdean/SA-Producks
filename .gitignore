@@ -1,0 +1,9 @@
+ProductsReprised/bin/
+ProductsReprised/obj/
+ProductsReprised.Core/bin/
+ProductsReprised.Core/obj/
+ProductsReprised.Data/bin/
+ProductsReprised.Data/obj/
+ProductsReprised.Service/bin/
+ProductsReprised.Service/obj/
+packages/
