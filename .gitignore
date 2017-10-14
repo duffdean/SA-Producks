@@ -1,0 +1,14 @@
+SA_ProductsReprised.Dto/bin/
+SA_ProductsReprised.Dto/obj/
+SA_ProductsReprised.Interfaces/bin/
+SA_ProductsReprised.Interfaces/obj/
+SA_ProductsReprised.Models/bin/
+SA_ProductsReprised.Models/obj/
+SA_ProductsReprised.Repository/bin/
+SA_ProductsReprised.Repository/obj/
+SA_ProductsReprised.Service/bin/
+SA_ProductsReprised.Service/obj/
+SA_ProductsReprised.Service.Interfaces/bin/
+SA_ProductsReprised.Service.Interfaces/obj/
+SA_ProductsReprised.Web/bin/
+SA_ProductsReprised.Web/obj
