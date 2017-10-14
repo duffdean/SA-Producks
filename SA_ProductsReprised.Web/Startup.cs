@@ -46,6 +46,7 @@ namespace SA_ProductsReprised.Web
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

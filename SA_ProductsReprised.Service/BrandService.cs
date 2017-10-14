@@ -2,6 +2,7 @@
 using SA_ProductsReprised.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 namespace SA_ProductsReprised.Service
 {
@@ -15,6 +16,13 @@ namespace SA_ProductsReprised.Service
         }
 
         public IEnumerable<Dto.SA_Brand> GetAll()
+        {
+            var brands = _brandRepository.GetAll();
+
+            return brands.Select(Map);
+        }
+
+        public IEnumerable<Dto.SA_Brand> GetAllWithUnderCutters()
         {
             var brands = _brandRepository.GetAll();
 
