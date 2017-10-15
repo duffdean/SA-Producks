@@ -1,4 +1,5 @@
-﻿using SA_ProductsReprised.Repositoty.Interfaces;
+﻿using Newtonsoft.Json;
+using SA_ProductsReprised.Repositoty.Interfaces;
 using SA_ProductsReprised.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace SA_ProductsReprised.Service
         public IEnumerable<Dto.SA_Brand> GetAllWithUnderCutters()
         {
             var brands = _brandRepository.GetAll();
+
+            //Need to make these calls to APIs more generic for all services
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new System.Uri("http://undercutters.azurewebsites.net");
+            client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+            HttpResponseMessage response = client.GetAsync("api/Brand").Result;
+            string data = response.Content.ReadAsStringAsync().Result;
+
+
+            var apiBrands = JsonConvert.DeserializeObject<IEnumerable<Dto.SA_Brand>>(data);
 
             return brands.Select(Map);
         }

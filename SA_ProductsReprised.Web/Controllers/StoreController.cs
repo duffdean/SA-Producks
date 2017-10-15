@@ -28,8 +28,21 @@ namespace SA_ProductsReprised.Web.Controllers
 
         public ActionResult Index()
         {
+            //Need to honour soft delete again...
+            //So will have to only return active categories in the service layer.
+            var categories = _categoryService.GetAllWithUnderCutters();
+            
+            return View(categories);
+        }
+
+        public ActionResult Products(int categoryId)
+        {
             var products = _productService.GetAllWithUnderCutters();
-            //var model = products.Select(_productSummaryMapper.Map).ToList();
+            //Should be doing this work in the service layer...
+            products = products.Where(p => p.CategoryID == categoryId);
+            
+            //Also need to display Out Of Stock when stock level is 0, and not just displaying 0
+            //Need to also pass through using ViewModel object and not the DTO object.
 
             return View(products);
         }

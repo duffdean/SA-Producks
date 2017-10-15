@@ -29,16 +29,19 @@ namespace SA_ProductsReprised.Service
         {
             var products = _productRepository.GetAll();
 
+            //Need to make these calls to APIs more generic for all services
             HttpClient client = new HttpClient();
             client.BaseAddress = new System.Uri("http://undercutters.azurewebsites.net");
             client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
             HttpResponseMessage response = client.GetAsync("api/Product").Result;
             string data = response.Content.ReadAsStringAsync().Result;
-            
 
-            var prods = JsonConvert.DeserializeObject<IEnumerable<Dto.SA_Product>>(data);
 
-            return products.Select(Map);
+            List<Dto.SA_Product> apiProds = JsonConvert.DeserializeObject<List<Dto.SA_Product>>(data);
+            IEnumerable<Dto.SA_Product> allProds = products.Select(Map);
+            allProds = allProds.ToList().Concat(apiProds);
+
+            return allProds;
         }
 
         public Dto.SA_Product Get(int id)
@@ -55,7 +58,9 @@ namespace SA_ProductsReprised.Service
                 ID = product.ID,
                 Name = product.Name,
                 Description = product.Description,
-                Active = product.Active
+                Active = product.Active,
+                BrandID = product.BrandID,
+                CategoryID = product.CategoryID
             };
         }
     }

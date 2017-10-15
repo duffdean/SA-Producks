@@ -1,7 +1,9 @@
-﻿using SA_ProductsReprised.Repositoty.Interfaces;
+﻿using Newtonsoft.Json;
+using SA_ProductsReprised.Repositoty.Interfaces;
 using SA_ProductsReprised.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 namespace SA_ProductsReprised.Service
 {
@@ -16,9 +18,27 @@ namespace SA_ProductsReprised.Service
 
         public IEnumerable<Dto.SA_Category> GetAll()
         {
-            var categorys = _categoryRepository.GetAll();
+            var categories = _categoryRepository.GetAll();
 
-            return categorys.Select(Map);
+            return categories.Select(Map);
+        }
+
+        public List<Dto.SA_Category> GetAllWithUnderCutters()
+        {
+            var categories = _categoryRepository.GetAll();
+
+            //Need to make these calls to APIs more generic for all services
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new System.Uri("http://undercutters.azurewebsites.net");
+            client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+            HttpResponseMessage response = client.GetAsync("api/Category").Result;
+            string data = response.Content.ReadAsStringAsync().Result;
+
+            List<Dto.SA_Category> apiCategories = JsonConvert.DeserializeObject<List<Dto.SA_Category>>(data);
+            IEnumerable<Dto.SA_Category> allCategories = categories.Select(Map);
+
+            allCategories = allCategories.ToList().Concat(apiCategories);
+            return allCategories.ToList();
         }
 
         public Dto.SA_Category Get(int id)

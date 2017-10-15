@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>SA_ProductsReprised.Models.ProdDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>SA-RepriseMyProducks - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
