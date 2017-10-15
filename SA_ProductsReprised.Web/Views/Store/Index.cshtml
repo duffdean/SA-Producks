@@ -1,0 +1,50 @@
+@model IEnumerable<SA_ProductsReprised.Dto.SA_Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                All Items
+            </td>
+            <td>
+                Displays all products for all categories
+            </td>
+            <td>
+                <a asp-action="Products" asp-route-categoryId="null">View Products</a>
+            </td>
+        </tr>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Products" asp-route-categoryId="@item.ID">View Products</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
